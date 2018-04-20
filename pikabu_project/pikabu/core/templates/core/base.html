@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Title</title>
+        <link href="{% static "base.css" %}" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <header>
+            <div align="center">
+                <h1><a href="{% url "core:main_page" %}"><img src="{% static "logo_big.png" %}"></a></h1>
+            </div>
+        </header>
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <a class="navbar-brand" href="{% url "post:post_new_list" %}">Главная</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto" >
+              <li class="nav-item">
+                <a class="nav-link" href="{% url "post:post_new_list" %}">Новые посты</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url "post:post_best_list" %}">Лучшие посты</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url "category:categories_list" %}">Категории</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url "core:users_list_page" %}">Пользователи</a>
+              </li>
+              {% if user.is_authenticated %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url "core:logout_page" %}">Выход</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url "post:post_create" %}">Создать пост</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url "core:home_page" %}">Профиль</a>
+                  </li>
+                {% endif %}
+                {% if user.is_anonymous %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url "core:login_page" %}">Вход</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url "core:registration_page" %}">Регистрация</a>
+                  </li>
+                {% endif %}
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+          </div>
+        </nav>
+            <div align="center">
+                {% block content %}
+
+                {% endblock %}
+            </div>
+        <footer>
+            <div align="center">
+                <h4>Copyright 2017</h4>
+            </div>
+        </footer>
+    </body>
+</html>

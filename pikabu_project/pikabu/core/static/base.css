@@ -1,0 +1,26 @@
+img {
+    display: block;
+    max-height: 100px;
+}
+
+menu a {
+    color: #6d9d67;
+}
+
+menu a:visited {
+    color: #6d9d67;
+}
+
+footer {
+    background-color: #6d9d67;
+}
+
+.navbar-light {
+    background: #6d9d67;
+    color: aliceblue;
+}
+
+.navbar-light li {
+    color: aliceblue;
+}
+

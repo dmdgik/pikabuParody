@@ -1,0 +1,15 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+
+    <form action="" method="post">
+        <h3>Регистрация пользователя</h3>
+        <h4>Заполните данные для регистрации</h4>
+
+        {% csrf_token %}
+        {{ form.as_p }}
+        {{ form.errors }}
+        <button type="submit">Зарегистрироваться</button>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+    <h2>Список лучших постов</h2>
+    <p>
+        {% for post in object_list %}
+            <p>
+                <a href="{% url "post:post_page" post_id=post.id %}">{{ post.title }}</a>
+            </p>
+        {% endfor %}
+    </p>
+{% endblock %}

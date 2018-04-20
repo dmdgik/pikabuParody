@@ -1,0 +1,39 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+    <div>
+        <h3>Пост № {{ post.id|default:"No Post" }}</h3>
+            <h3>Заголовок</h3>
+        <h4> {{ post.title|default:"" }}</h4>
+            <h3>Текст поста</h3>
+        <h4> {{ post.content_text|default:"" }}</h4>
+            <h3>Автор поста</h3>
+        <h4> {{ post.author|default:"" }}</h4>
+    </div>
+    <div>
+        {% if user == post.author %}
+            <a href="{% url "post:post_edit" post_id=post.id %}">Редактировать</a>
+        {% endif %}
+    </div>
+    <div>
+        <h3>Категории поста</h3>
+            {% for category in post.category.all %}
+                <a href="{% url "category:category_posts" name_of_category=category.title %}">
+                    <p>{{ category.title }}</p>
+                </a>
+            {% endfor %}
+    </div>
+    <div>
+        <h3>Комментарии</h3>
+            {% for comment in post.Comments.all %}
+                <p>---------------------------------------</p>
+                <p>{{ comment.content_text }}, Автор комментария: {{ comment.author }}</p>
+            {% endfor %}
+            {% if user.is_authenticated %}
+                    <p>Новый комментарий</p>
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit">Отправить комментарий</button>
+            {% endif %}
+    </div>
+{% endblock %}
